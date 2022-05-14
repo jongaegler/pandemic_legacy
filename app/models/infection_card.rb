@@ -1,0 +1,2 @@
+class InfectionCard < ApplicationRecord
+end
