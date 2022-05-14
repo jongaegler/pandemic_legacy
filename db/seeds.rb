@@ -12,4 +12,6 @@ end
 Disease::AVAILABLE_COLORS.each do |color|
   Disease.create(color: color)
 end
-City.where(name: BLUE_CITIES).update_all(disease: Disease)
+# Assign color
+# City.where(name: BLUE_CITIES).update_all(disease: )
+City.find_by(name: 'Atlanta').update(starts_with_research_station: true)
