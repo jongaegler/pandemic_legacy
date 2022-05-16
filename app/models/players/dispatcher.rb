@@ -1,0 +1,2 @@
+class Dispatcher < Character
+end

@@ -1,5 +1,6 @@
 class Disease < ApplicationRecord
   MAX_CUBES = 24
+  scope :cured -> { where(cured: true) }
 
   # Convenience accessors Disease.red
   AVAILABLE_COLORS.each do |color|

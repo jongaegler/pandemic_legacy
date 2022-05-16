@@ -1,0 +1,2 @@
+class Researcher < Character
+end

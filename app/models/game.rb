@@ -8,10 +8,29 @@ class Game < ApplicationRecord
     # assign mission brieifing
     City.place_starting_structures
     Disease.reset_to_default
+    InfectionCard.start_game
     # Add cards based on funding level to deck
     # shuffle
     deal
     # set starting location
+  end
+
+  def win_game
+    update(win: true)
+    season.decrement!(:funding_level, 2)
+    # get win bonus
+    end_game
+  end
+
+  def lose_game
+    update(win: false)
+    season.increment!(:funding_level, 2)
+    end_game
+  end
+
+  def end_game
+    # choose upgrades
+    update(current: false)
   end
 
   private

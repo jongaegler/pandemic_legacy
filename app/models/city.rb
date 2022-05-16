@@ -5,8 +5,32 @@ class City < ApplicationRecord
   RED_CITIES = %w(Bangkok Beijing Ho\ Chi\ Minh\ City Hong\ Kong Jakarta Manila Osaka Seoul Shanghai Sydney Taipei Tokyo)
   ALL_CITIES = BLUE_CITIES + YELLOW_CITIES + BLACK_CITIES + RED_CITIES
 
+  has_one :infection_card
+  has_many :players
+
   def self.place_starting_structures
     where(starts_with_research_station: true).update_all(research_station: true)
+  end
+
+  def disease
+    Disease.send(color)
+  end
+
+  def infect(disease = disease)
+    will_outbreak?(disease) ? outbreak : increment!("#{disease.color}_cubes")
+  end
+
+  def outbreak
+    connected_cities.each do |city|
+      city.infect(disease)
+    end
+    city.players.each(&:add_scar)
+    increment!(:panic_level)
+    game.increment!(:outbreak_counter)
+  end
+
+  def will_outbreak?(disease)
+    send("#{disease.color}_cubes") == 3
   end
 
   def connected_cities
@@ -14,4 +38,14 @@ class City < ApplicationRecord
     City.where(id: JSON.parse(city_connections))
   end
 
+  def panic_state
+    case panic_level
+    when 0, nil then :normal
+    when 1      then :unstable
+    when 2, 3   then :rioting
+    when 4      then :collapsing
+    else
+      :fallen
+    end
+  end
 end
