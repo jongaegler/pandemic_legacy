@@ -17,7 +17,12 @@ class City < ApplicationRecord
   end
 
   def infect(disease = disease)
-    will_outbreak?(disease) ? outbreak : increment!("#{disease.color}_cubes")
+    if will_outbreak?(disease)
+      outbreak
+    else
+      cubes[color] += 1
+      save!
+    end
   end
 
   def outbreak
@@ -30,12 +35,15 @@ class City < ApplicationRecord
   end
 
   def will_outbreak?(disease)
-    send("#{disease.color}_cubes") == 3
+    cubes[color] == 3
   end
 
   def connected_cities
     # Parse hack until switching to postgres
     City.where(id: JSON.parse(city_connections))
+  end
+
+  def has_cubes(disease)
   end
 
   def panic_state

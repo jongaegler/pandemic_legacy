@@ -1,2 +1,2 @@
-class Civilian < Character
+class Civilian < Player
 end

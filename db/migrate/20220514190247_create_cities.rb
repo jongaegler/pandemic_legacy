@@ -7,10 +7,7 @@ class CreateCities < ActiveRecord::Migration[7.0]
       t.integer :panic_level, default: 0
       t.boolean :starts_with_research_station, default: false
       t.boolean :research_station, default: false
-      t.integer :red_cubes, default: 0
-      t.integer :blue_cubes, default: 0
-      t.integer :black_cubes, default: 0
-      t.integer :yellow_cubes, default: 0
+      t.json :cubes, default: { red: 0, blue: 0, yellow: 0, black: 0 }
 
       t.timestamps
     end

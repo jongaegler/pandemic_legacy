@@ -1,2 +1,2 @@
-class Researcher < Character
+class Researcher < Player
 end

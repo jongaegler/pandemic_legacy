@@ -1,2 +1,2 @@
-class Dispatcher < Character
+class Dispatcher < Player
 end

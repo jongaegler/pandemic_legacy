@@ -1,5 +1,6 @@
 class Game < ApplicationRecord
   belongs_to :season
+  has_many :objectives
   validates :infection_rate, numericality: { in: 2..4 }
   validates :outbreak_counter, numericality: { in: 0..8 }
   MAX_RESEARCH_STATIONS = 6

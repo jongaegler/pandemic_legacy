@@ -30,4 +30,6 @@
 # available at https://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  january_briefing: "You know the drill. We've got four viruses causing us problems. They seem to be mutating faster than usual - we have someone looking into that. For now, keep it under control as one of them may grow beyond our capabilities"
+  january_briefing_update: 'Worst fears confirmed. The disease with the most cubes on the board (of those that do not have discovered cures) is now calssified as "COdA-403a." If there are two or more eligible diseases, or all are cured select one to be COdA-403a. <bold>The cure to COdA can no longer be found using known techniques.</bold> Players can continue to treat COdA but it is drug-resistant and <bold>players taking the Treat action must now spend 1 additional action to treat COdA.</bold> <red> Right now: Destroy your original objevtive card. A new objective will follow. The open dossier door:</red> (19)'
+  february_briefing: "We have to get ahead of this new COdA virus as it is unlike any we've seen in nature. We've managed to get authorization to start quarantining the hot spots/ Treat the viruses we know about and keep COdA under control until more work can be done on it. COdA has mutated again and now it can no longer be Treated using any know techniques. Continue on with your existing objetive."
