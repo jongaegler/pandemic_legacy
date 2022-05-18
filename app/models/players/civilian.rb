@@ -1,2 +1,0 @@
-class Civilian < Player
-end

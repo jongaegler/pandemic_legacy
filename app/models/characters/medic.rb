@@ -1,4 +1,4 @@
-class Medic < Player
+class Characters::Medic < Character
   def move(city)
     Disease.cured.each { |disease| cure(city, disease.color) }
     super

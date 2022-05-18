@@ -1,4 +1,6 @@
 module PlayerActions
+  extend ActiveSupport::Concern
+
   def move(city)
     update(city_id: city.id)
   end

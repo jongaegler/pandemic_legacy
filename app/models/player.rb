@@ -7,12 +7,14 @@ class Player < ApplicationRecord
 
   has_many :player_cards
   has_many :scars
-  has many :upgrades
+#  has many :upgrades
+  belongs_to :character, optional: true
 
+  # Can probably do descendents later on
   CHARACTERS = %w(dispatcher generalist medic scientist researcher)
   CHARACTERS.each do |character|
     define_method("#{character}?") do
-      name == character
+      self.character == character
     end
   end
 

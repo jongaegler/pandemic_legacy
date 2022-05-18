@@ -6,14 +6,24 @@ class Game < ApplicationRecord
   MAX_RESEARCH_STATIONS = 6
 
   def setup_game
+    reset_board
     # assign mission brieifing
     City.place_starting_structures
-    Disease.reset_to_default
     InfectionCard.start_game
     # Add cards based on funding level to deck
-    # shuffle
+    shuffle_decks
     deal
     # set starting location
+  end
+
+  def setup_decks
+    InfectionCard.shuffle
+
+
+  end
+
+  def reset_board
+    Disease.reset_to_default
   end
 
   def win_game

@@ -6,44 +6,38 @@ class City < ApplicationRecord
   ALL_CITIES = BLUE_CITIES + YELLOW_CITIES + BLACK_CITIES + RED_CITIES
 
   has_one :infection_card
+  has_one :city_card, class_name: 'PlayerCards::CityCard'
   has_many :players
 
   def self.place_starting_structures
     where(starts_with_research_station: true).update_all(research_station: true)
   end
 
-  def disease
+  def default_disease
     Disease.send(color)
   end
 
-  def infect(disease = disease)
-    if will_outbreak?(disease)
-      outbreak
-    else
-      cubes[color] += 1
-      save!
-    end
+  def infect(disease, count = 1)
+    return oubreak if will_outbreak?(d, count)
+
+    cubes[color] += count
+    save!
   end
 
   def outbreak
-    connected_cities.each do |city|
-      city.infect(disease)
-    end
+    connected_cities.each { |city| city.infect(disease) }
     city.players.each(&:add_scar)
     increment!(:panic_level)
     game.increment!(:outbreak_counter)
   end
 
-  def will_outbreak?(disease)
-    cubes[color] == 3
+  def will_outbreak?(disease, count)
+    cubes[color] + count > 3
   end
 
   def connected_cities
     # Parse hack until switching to postgres
     City.where(id: JSON.parse(city_connections))
-  end
-
-  def has_cubes(disease)
   end
 
   def panic_state

@@ -1,7 +1,8 @@
 class PlayerCard < ApplicationRecord
+  include ::Deck
   belongs_to :player
 
-  scope :undealt -> { where(player_id: nil, discarded: false) }
+  scope :undealt, -> { where(player_id: nil, discarded: false) }
 
   def self.draw
     card = undealt.first

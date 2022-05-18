@@ -1,2 +1,0 @@
-class Dispatcher < Player
-end
